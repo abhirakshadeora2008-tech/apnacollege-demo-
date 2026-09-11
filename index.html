@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="RyeGuard helps growers protect rye crops with practical scouting, disease prevention, and field-ready advice." />
+	<title>RyeGuard | Protect every stand</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--ink: #17251d;
+			--muted: #617067;
+			--cream: #f5f1e7;
+			--paper: #fffdf8;
+			--leaf: #274c36;
+			--leaf-light: #dce8d3;
+			--wheat: #e4ad54;
+			--line: #d8ded1;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--cream);
+			color: var(--ink);
+			font-family: "DM Sans", sans-serif;
+			line-height: 1.5;
+		}
+		a { color: inherit; text-decoration: none; }
+		.wrap { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+		.topbar { background: var(--leaf); color: #ecf1e9; font-size: 12px; letter-spacing: .04em; }
+		.topbar .wrap { display: flex; justify-content: space-between; gap: 18px; padding: 9px 0; }
+		header { padding: 24px 0; background: var(--cream); }
+		nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+		.brand { display: flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: -.03em; }
+		.brand-mark { width: 35px; height: 35px; display: grid; place-items: center; background: var(--wheat); color: var(--leaf); border-radius: 50% 50% 50% 4px; transform: rotate(-13deg); font-size: 18px; }
+		.brand span:last-child { transform: translateY(1px); }
+		.nav-links { display: flex; align-items: center; gap: 30px; color: #445449; font-size: 14px; }
+		.nav-links a:hover { color: var(--leaf); }
+		.button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid var(--leaf); border-radius: 3px; padding: 12px 19px; background: var(--leaf); color: #fff; font-size: 13px; font-weight: 700; transition: transform .2s, background .2s; }
+		.button:hover { transform: translateY(-2px); background: #183825; }
+		.button.secondary { background: transparent; color: var(--leaf); }
+		.button.secondary:hover { background: var(--leaf-light); }
+		.menu { display: none; border: 0; background: none; font-size: 22px; color: var(--leaf); }
+
+		.hero { padding: 60px 0 88px; overflow: hidden; }
+		.hero-grid { display: grid; grid-template-columns: 1fr 1.03fr; align-items: center; gap: 70px; }
+		.eyebrow { display: flex; align-items: center; gap: 10px; color: #b67d24; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+		.eyebrow::before { content: ""; width: 31px; height: 1px; background: var(--wheat); }
+		h1, h2, h3 { margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: -.045em; line-height: 1.04; }
+		h1 { max-width: 590px; margin-top: 18px; font-size: clamp(46px, 6vw, 78px); }
+		h1 em { color: var(--leaf); font-style: normal; }
+		.hero-copy { max-width: 500px; margin: 24px 0 30px; color: var(--muted); font-size: 17px; }
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+		.hero-note { display: flex; align-items: center; gap: 10px; margin-top: 25px; color: #69766b; font-size: 12px; }
+		.hero-note b { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; background: var(--leaf-light); color: var(--leaf); }
+		.field-card { position: relative; min-height: 490px; padding: 22px; background: #a8bd8e; overflow: hidden; box-shadow: 14px 14px 0 var(--leaf-light); }
+		.field-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(122deg, rgba(26,62,39,.18), transparent 48%), url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=85") center/cover; mix-blend-mode: multiply; opacity: .92; }
+		.field-card::after { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(255,255,255,.5); pointer-events: none; }
+		.field-label { position: absolute; z-index: 1; left: 45px; bottom: 42px; color: white; }
+		.field-label small { display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+		.field-label strong { display: block; max-width: 260px; font: 600 30px/1.05 Fraunces, Georgia, serif; }
+		.scan-tag { position: absolute; z-index: 1; right: 43px; top: 43px; background: var(--paper); color: var(--leaf); padding: 9px 12px; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+
+		.stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper); }
+		.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+		.stat { padding: 28px 32px; border-right: 1px solid var(--line); }
+		.stat:first-child { padding-left: 0; }
+		.stat:last-child { border: 0; }
+		.stat strong { display: block; color: var(--leaf); font: 700 31px Fraunces, Georgia, serif; }
+		.stat span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+
+		.section { padding: 102px 0; }
+		.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 43px; }
+		h2 { max-width: 530px; font-size: clamp(35px, 4vw, 54px); }
+		.section-heading p { max-width: 340px; margin: 0; color: var(--muted); font-size: 14px; }
+		.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+		.service { min-height: 255px; padding: 29px; background: var(--paper); border-top: 3px solid var(--wheat); }
+		.service:nth-child(2) { border-color: var(--leaf); }
+		.service:nth-child(3) { border-color: #9a6544; }
+		.service-icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 34px; border-radius: 50%; background: var(--leaf-light); color: var(--leaf); font-size: 20px; }
+		.service h3 { margin-bottom: 12px; font-size: 25px; }
+		.service p { margin: 0; color: var(--muted); font-size: 14px; }
+
+		.guide { background: var(--leaf); color: #f5f1e7; }
+		.guide-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; align-items: center; }
+		.guide .eyebrow { color: #e4ad54; }
+		.guide h2 { margin-top: 16px; }
+		.guide-copy { margin: 22px 0 28px; color: #c8d4c7; font-size: 15px; }
+		.guide .button { background: var(--wheat); border-color: var(--wheat); color: var(--ink); }
+		.steps { border-top: 1px solid rgba(255,255,255,.22); }
+		.step { display: grid; grid-template-columns: 52px 1fr; gap: 18px; padding: 21px 0; border-bottom: 1px solid rgba(255,255,255,.22); }
+		.step-number { color: var(--wheat); font: 700 18px Fraunces, Georgia, serif; }
+		.step h3 { margin-bottom: 4px; font-size: 20px; }
+		.step p { margin: 0; color: #b8c9bb; font-size: 13px; }
+
+		.season { background: var(--paper); }
+		.season-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+		.season-image { min-height: 390px; background: url("https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1000&q=85") center/cover; }
+		.season-list { margin: 30px 0 0; padding: 0; list-style: none; }
+		.season-list li { display: flex; gap: 15px; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+		.season-list li::before { content: "✓"; color: var(--leaf); font-weight: 700; }
+		footer { padding: 30px 0; background: var(--ink); color: #c4d0c4; font-size: 12px; }
+		footer .wrap { display: flex; justify-content: space-between; gap: 20px; }
+
+		@media (max-width: 760px) {
+			.wrap { width: min(100% - 32px, 560px); }
+			.topbar .wrap, footer .wrap { display: block; }
+			.topbar .wrap span:last-child { display: none; }
+			.nav-links { display: none; }
+			.menu { display: block; }
+			header { padding: 18px 0; }
+			.hero { padding: 35px 0 60px; }
+			.hero-grid, .guide-grid, .season-grid { grid-template-columns: 1fr; gap: 42px; }
+			.field-card { min-height: 330px; box-shadow: 8px 8px 0 var(--leaf-light); }
+			.stats-grid { grid-template-columns: 1fr; }
+			.stat, .stat:first-child { padding: 18px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+			.section { padding: 70px 0; }
+			.section-heading { display: block; margin-bottom: 28px; }
+			.section-heading p { margin-top: 16px; }
+			.services { grid-template-columns: 1fr; }
+			.service { min-height: auto; }
+			.season-image { min-height: 260px; order: 2; }
+			footer .wrap span { display: block; margin-top: 8px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="topbar"><div class="wrap"><span>FIELD NOTES FOR HEALTHIER RYE</span><span>Independent crop protection guidance · 2024/25 season</span></div></div>
+	<header>
+		<nav class="wrap" aria-label="Main navigation">
+			<a href="#top" class="brand"><span class="brand-mark">✳</span><span>RyeGuard</span></a>
+			<div class="nav-links"><a href="#protection">Protection</a><a href="#scouting">Scouting guide</a><a href="#season">Seasonal care</a></div>
+			<a class="button" href="mailto:fieldnotes@ryeguard.co">Talk to an agronomist <span>↗</span></a>
+			<button class="menu" aria-label="Open menu">☰</button>
+		</nav>
+	</header>
+
+	<main id="top">
+		<section class="hero"><div class="wrap hero-grid">
+			<div>
+				<div class="eyebrow">Protection starts in the field</div>
+				<h1>Keep your rye <em>standing strong.</em></h1>
+				<p class="hero-copy">Practical, timely crop protection for growers who want a cleaner stand, stronger roots, and a harvest worth the season.</p>
+				<div class="hero-actions"><a class="button" href="#scouting">Explore the field guide <span>↓</span></a><a class="button secondary" href="#protection">Our approach</a></div>
+				<div class="hero-note"><b>✓</b> Built for growers, backed by agronomy</div>
+			</div>
+			<div class="field-card" role="img" aria-label="A healthy field at sunrise">
+				<span class="scan-tag">Field-ready advice</span><div class="field-label"><small>Rye / Secale cereale</small><strong>Protect the promise in every row.</strong></div>
+			</div>
+		</div></section>
+
+		<section class="stats"><div class="wrap stats-grid"><div class="stat"><strong>3 stages</strong><span>to a healthier, more resilient crop</span></div><div class="stat"><strong>24–48 hrs</strong><span>can make the difference when scouting</span></div><div class="stat"><strong>1 clear plan</strong><span>for decisions from seed to harvest</span></div></div></section>
+
+		<section class="section" id="protection"><div class="wrap">
+			<div class="section-heading"><h2>Protection that works with the crop.</h2><p>Rye is resilient. The right attention at the right moment makes it even stronger.</p></div>
+			<div class="services"><article class="service"><div class="service-icon">⌁</div><h3>Prevent disease</h3><p>Spot the early signs of rust, mildew, and blight before they move through the canopy.</p></article><article class="service"><div class="service-icon">✣</div><h3>Build resilience</h3><p>Support deep roots and a balanced stand with decisions shaped around your soil and season.</p></article><article class="service"><div class="service-icon">◒</div><h3>Protect yield</h3><p>Make each input count with clear thresholds, careful timing, and a plan for harvest.</p></article></div>
+		</div></section>
+
+		<section class="section guide" id="scouting"><div class="wrap guide-grid"><div><div class="eyebrow">The 15-minute field check</div><h2>A sharper look now saves a hard decision later.</h2><p class="guide-copy">Use our simple rhythm every time you walk a rye field. Notice, record, respond.</p><a class="button" href="mailto:fieldnotes@ryeguard.co?subject=Rye%20field%20check">Request the field checklist <span>↗</span></a></div><div class="steps"><div class="step"><span class="step-number">01</span><div><h3>Walk the pattern</h3><p>Enter from three points and check low spots, headlands, and the crop’s center.</p></div></div><div class="step"><span class="step-number">02</span><div><h3>Check the leaves</h3><p>Look under the canopy for lesions, discoloration, insects, and unusual stress.</p></div></div><div class="step"><span class="step-number">03</span><div><h3>Choose your response</h3><p>Record what you find, compare it to your threshold, and act with intention.</p></div></div></div></div></section>
+
+		<section class="section season" id="season"><div class="wrap season-grid"><div class="season-image" role="img" aria-label="Golden rye heads ready for harvest"></div><div><div class="eyebrow">A season-long view</div><h2>Good protection is a rhythm, not a rescue.</h2><ul class="season-list"><li><span><strong>Autumn:</strong> Start clean with seed and soil checks.</span></li><li><span><strong>Spring:</strong> Scout early as growth accelerates.</span></li><li><span><strong>Heading:</strong> Protect the crop’s most valuable window.</span></li><li><span><strong>Harvest:</strong> Review the season and plan the next stand.</span></li></ul></div></div></section>
+	</main>
+	<footer><div class="wrap"><span>© 2025 RyeGuard Field Notes</span><span>Clear advice for stronger rye.</span></div></footer>
+</body>
+</html>
+ 
